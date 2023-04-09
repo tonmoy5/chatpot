@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import EmojiPicker from "emoji-picker-react"; // import your emoji picker library
 import { CiMenuKebab } from "react-icons/ci";
 import {
   IoIosArrowBack,
@@ -14,6 +15,7 @@ const Chat = (props) => {
   const chatID = props.chatID;
   const divRef = useRef(null);
   const inputRef = useRef(null);
+  const [isEmojiOpen, setIsEmojiOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const chat = userData.chatList.find((chat) => chat.id === chatID);
   const status = chat?.friend?.status ? "Online" : "Offline";
@@ -54,7 +56,7 @@ const Chat = (props) => {
   }, [divRef, chatID]);
 
   return (
-    <div className="relative">
+    <div className="">
       {/* chat heder */}
       <div className="flex right-0 top-0 absolute w-full border-b items-center justify-between md:pl-5 pr-3 py-2 shadow-sm backdrop-blur-md transition-colors duration-500 ">
         {/* friends profile */}
@@ -113,55 +115,84 @@ const Chat = (props) => {
       </div>
 
       {/* chats */}
-      <div>
-        <div
-          ref={divRef}
-          className="bg-[#EBEBEB] w-full h-screen py-20 px-2 overflow-y-auto"
-        >
-          {sortedMessages?.map((message, index) => (
-            <div
-              key={index}
-              className={
-                message.sender === "me"
-                  ? "flex justify-end"
-                  : "flex justify-start"
-              }
-            >
-              <p
+      <div 
+        className="bg-slate-900 h-[calc(100vh-60px)] md:h-[100vh] flex flex-col justify-between"
+        onClick={()=>isEmojiOpen && setIsEmojiOpen(false)}
+      >
+        {/* Top Section Start */}
+        <div className="">
+          <div
+            ref={divRef}
+            className="w-full py-20 px-2 h-[calc(100vh-110px)] md:h-[calc(100vh-80px)]  overflow-y-scroll "
+          >
+            {sortedMessages?.map((message, index) => (
+              <div
+                key={index}
                 className={
                   message.sender === "me"
-                    ? "bg-[#e8dcdc] rounded-full px-2 py-1 m-2 max-w-[500px] shadow"
-                    : "bg-[#FFFFFF] rounded-full px-2 py-1 m-2  shadow"
+                    ? "flex justify-end"
+                    : "flex justify-start"
                 }
               >
-                {message.text}
-              </p>
-            </div>
-          ))}
+                <p
+                  className={
+                    message.sender === "me"
+                      ? "bg-[#e8dcdc] rounded-full px-2 py-1 m-2 max-w-[500px] shadow"
+                      : "bg-[#FFFFFF] rounded-full px-2 py-1 m-2  shadow"
+                  }
+                >
+                  {message.text}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+        {/* Top Section End */}
 
-      <div className="absolute left-1/2 transform -translate-x-1/2 w-5/6 md:w-1/2 md:min-w-[600px] h-10 md:h-14 rounded-full backdrop-blur-md pr-3 shadow-md bottom-20 md:bottom-5 flex justify-between items-center">
-        <input
-          className="w-3/4 h-full rounded-full pl-6 pr-12"
-          type="text"
-          ref={inputRef}
-          placeholder="Type your message here"
-        />
-        <div className="flex items-center justify-center w-1/4 h-full">
-          <span className="md:mr-4 mr-2 text-lg hover:scale-125 cursor-pointer transition-all">
-            <IoIosAttach />
-          </span>
-          <span className="md:mr-4 mr-2 text-lg hover:scale-125 cursor-pointer transition-all">
-            <BsEmojiSmile />
-          </span>
-          <button
-            onClick={handleMessage}
-            className="md:w-8 md:h-8 w-5 h-5 rounded-full md:bg-slate-200 flex items-center justify-center transition-all hover:scale-125"
-          >
-            <IoIosSend />
-          </button>
+        {/* Input Section Start */}
+        <div className="w-full flex items-center justify-center">
+          <div className="mb-3 w-5/6 md:w-1/2 md:min-w-[600px] h-10 md:h-14 rounded-full backdrop-blur-md pr-3 shadow-md bottom-20 md:bottom-5 flex justify-between items-center">
+            <input
+              className="w-3/4 h-full rounded-full pl-6 pr-12"
+              type="text"
+              ref={inputRef}
+              placeholder="Type your message here"
+            />
+            <div className="flex items-center justify-center w-1/4 h-full">
+              <span className="md:mr-4 mr-2 text-lg hover:scale-125 cursor-pointer transition-all">
+                <IoIosAttach />
+              </span>
+              <span
+                className="md:mr-4 mr-2 text-lg hover:scale-125 cursor-pointer transition-all"
+                onClick={()=>setIsEmojiOpen(!isEmojiOpen)}
+              >
+                <BsEmojiSmile className="relative" />
+              </span>
+              <button
+                onClick={handleMessage}
+                className="md:w-8 md:h-8 w-5 h-5 rounded-full md:bg-slate-200 flex items-center justify-center transition-all hover:scale-125"
+              >
+                <IoIosSend />
+              </button>
+
+              {/* emoji picker  starts */}
+
+              <div className="absolute bottom-16 -right-3">
+                {isEmojiOpen && (
+                  <EmojiPicker
+                    onEmojiClick={(event, emojiObject) => {
+                      // handle emoji click here
+                      console.log(emojiObject);
+                    }}
+                  />
+                )}
+              </div>
+              {/* emoji picker ends  */}
+            </div>
+          </div>
         </div>
+
+
       </div>
     </div>
   );

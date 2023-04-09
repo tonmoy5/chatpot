@@ -26,53 +26,7 @@ const userData = {
     },
   ],
 
-  // chatList: [
-  //   {
-  //     id: 1,
-  //     friend: {
-  //       id: 1,
-  //       name: "Alice",
-  //       avatar: "https://via.placeholder.com/150",
-  //       status: true,
-  //       userName: "@Alice",
-  //     },
-  //     allChat:{
-  //       sender:{
-  //         me:[],
-  //         friend:[]
-  //       }
-  //     },
-  //     lastMessage: "Hello",
-  //     unseenMessages: 2,
-  //     time: "10:00 AM",
-  //   },
-  //   {
-  //     id: 2,
-  //     friend: {
-  //       id: 2,
-  //       name: "Bob",
-  //       avatar: "https://via.placeholder.com/150",
-  //       status: false,
-  //       userName: "@Bob",
-  //     },
-  //     lastMessage: "How are you?",
-  //     unseenMessages: 0,
-  //     time: "09:00 AM",
-  //   },
-  //   {
-  //     id: 3,
-  //     friend: {
-  //       id: 3,
-  //       name: "Charlie",
-  //       avatar: "https://via.placeholder.com/150",
-  //       status: true,
-  //       userName: "@Charlie",
-  //     },
-  //     lastMessage: "What are you up to?",
-  //     unseenMessages: 1,
-  //     time: "08:00 AM",
-  //   },
-  // ],
+  
 
   chatList: [
     {
@@ -182,6 +136,7 @@ const userData = {
       unseenMessages: 0,
       time: "11:47 AM",
     },
+    
     {
       id: 2,
       friend: {

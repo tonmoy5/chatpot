@@ -18,20 +18,8 @@ const Chat = (props) => {
   const chat = userData.chatList.find((chat) => chat.id === chatID);
   const status = chat.friend.status ? "Online" : "Offline";
   
-  const handleMessage = (event) => {
-    event.preventDefault(); // prevent the form from submitting
 
 
-    const input = inputRef.current;
-    const newMessage = inputRef.current.value;
-
-    // Add the new message to the messages array
-    setMessages([...messages, newMessage]);
-
-    // Clear the input field
-    input.value = "";
-  };
-console.log(messages)
   const sortedMessages = [
     ...chat.messages.sender.me,
     ...chat.messages.sender.friend,
@@ -45,6 +33,22 @@ console.log(messages)
         : "friend";
       return { ...message, sender: senderType };
     });
+
+    const handleMessage = (event) => {
+      const input = inputRef.current
+      const newMessage = inputRef.current.value;
+      const newMessageObj = {
+        timestamp : new Date(),
+        text: newMessage,
+      }
+  
+      // Add the new message to the messages array
+      chat.messages.sender.me.push(newMessageObj)
+      setMessages([newMessageObj]);
+  
+      // Clear the input field
+      input.value = "";
+    };
 
   useEffect(() => {
     const objDiv = divRef.current;
@@ -140,7 +144,7 @@ console.log(messages)
         </div>
       </div>
 
-      <div className="absolute left-1/2 transform -translate-x-1/2 w-1/2 min-w-[600px] h-14 rounded-full bg-slate-300 bottom-5 flex justify-between items-center">
+      <div className="absolute left-1/2 transform -translate-x-1/2 w-5/6 md:w-1/2 md:min-w-[600px] h-10 md:h-14 rounded-full backdrop-blur-md pr-3 shadow-md bottom-20 md:bottom-5 flex justify-between items-center">
 
           <input
             className="w-3/4 h-full rounded-full pl-6 pr-12"
@@ -149,15 +153,15 @@ console.log(messages)
             placeholder="Type your message here"
           />
         <div className="flex items-center justify-center w-1/4 h-full">
-          <span className="mr-4 text-xl hover:scale-125 cursor-pointer transition-all">
+          <span className="md:mr-4 mr-2 text-lg hover:scale-125 cursor-pointer transition-all">
             <IoIosAttach />
           </span>
-          <span className="mr-4 text-xl hover:scale-125 cursor-pointer transition-all">
+          <span className="md:mr-4 mr-2 text-lg hover:scale-125 cursor-pointer transition-all">
             <BsEmojiSmile />
           </span>
           <button
             onClick={handleMessage}
-            className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center transition-all hover:scale-125"
+            className="md:w-8 md:h-8 w-5 h-5 rounded-full md:bg-slate-200 flex items-center justify-center transition-all hover:scale-125"
           >
             <IoIosSend />
           </button>

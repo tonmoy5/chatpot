@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SlMagnifier } from "react-icons/sl";
 import Chat from "../Chat/Chat";
-import userData from "../UserData/UserData";
+import userData from "../../Assets/UserData/UserData";
 
 
 // console.log(userData);

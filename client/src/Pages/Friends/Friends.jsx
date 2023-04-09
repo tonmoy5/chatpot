@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { IoIosCall } from "react-icons/io";
 import { SlMagnifier } from "react-icons/sl";
 import Chat from "../Chat/Chat";
-import userData from "../UserData/UserData";
+import userData from "../../Assets/UserData/UserData";
 
 const Friends = () => {
   const [selected, setSelected] = useState(1);

@@ -1,10 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Calls from "./Calls/Calls";
-import Chats from "./Chats/Chats";
-import Friends from "./Friends/Friends";
+import Calls from "./Pages/Calls/Calls";
+
+import Chats from "./Pages/Chats/Chats";
+
+import Friends from "./Pages/Friends/Friends";
+
 import Main from "./Layouts/Main";
-import Settings from "./Settings/Settings";
+
+import Settings from "./Pages/Settings/Settings";
 
 const router = createBrowserRouter([
   {

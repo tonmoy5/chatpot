@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MdCallMade, MdCallMissed, MdCallReceived } from "react-icons/md";
 
 import { SlMagnifier } from "react-icons/sl";
-import userData from "../UserData/UserData";
+import userData from "../../Assets/UserData/UserData";
 
 const Calls = () => {
   const [selected, setSelected] = useState(1);

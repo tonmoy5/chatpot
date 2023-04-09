@@ -1,15 +1,37 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CiMenuKebab } from "react-icons/ci";
-import { IoIosArrowBack, IoIosCall } from "react-icons/io";
+import {
+  IoIosArrowBack,
+  IoIosAttach,
+  IoIosCall,
+  IoIosSend,
+} from "react-icons/io";
 import { SlMagnifier } from "react-icons/sl";
-import userData from "../UserData/UserData";
+import { BsEmojiSmile } from "react-icons/bs";
+import userData from "../../Assets/UserData/UserData";
 
 const Chat = (props) => {
   const chatID = props.chatID;
-  const divRef = useRef(null)
-  console.log(chatID);
+  const divRef = useRef(null);
+  const inputRef = useRef(null);
+  const [messages, setMessages] = useState([]);
   const chat = userData.chatList.find((chat) => chat.id === chatID);
   const status = chat.friend.status ? "Online" : "Offline";
+  
+  const handleMessage = (event) => {
+    event.preventDefault(); // prevent the form from submitting
+
+
+    const input = inputRef.current;
+    const newMessage = inputRef.current.value;
+
+    // Add the new message to the messages array
+    setMessages([...messages, newMessage]);
+
+    // Clear the input field
+    input.value = "";
+  };
+console.log(messages)
   const sortedMessages = [
     ...chat.messages.sender.me,
     ...chat.messages.sender.friend,
@@ -24,12 +46,10 @@ const Chat = (props) => {
       return { ...message, sender: senderType };
     });
 
-  console.log(sortedMessages);
-
   useEffect(() => {
-    const objDiv = divRef.current
+    const objDiv = divRef.current;
     objDiv.scrollTop = objDiv.scrollHeight;
-  }, [divRef, chatID])
+  }, [divRef, chatID]);
 
   return (
     <div className="relative">
@@ -37,9 +57,13 @@ const Chat = (props) => {
       <div className="flex right-0 top-0 absolute w-full border-b bg-[#f0efef] items-center justify-between md:pl-5 pr-3 py-2 shadow-sm bg-slate-50/60 backdrop-blur-xl transition-colors duration-500 ">
         {/* friends profile */}
         <div className="grid grid-cols-5  ">
-
           {/* back arrow */}
-          <div onClick={() => { props.setShowChat((prevShowDiv1) => !prevShowDiv1) }} className="flex justify-center items-center md:hidden hover:scale-105">
+          <div
+            onClick={() => {
+              props.setShowChat((prevShowDiv1) => !prevShowDiv1);
+            }}
+            className="flex justify-center items-center md:hidden hover:scale-105"
+          >
             <IoIosArrowBack className="text-xl" />
           </div>
           {/* friend's pic */}
@@ -88,7 +112,10 @@ const Chat = (props) => {
 
       {/* chats */}
       <div>
-        <div ref={divRef} className="bg-[#EBEBEB] w-full h-screen py-20 px-2 overflow-y-auto">
+        <div
+          ref={divRef}
+          className="bg-[#EBEBEB] w-full h-screen py-20 px-2 overflow-y-auto"
+        >
           {sortedMessages?.map((message) => (
             <div>
               <div
@@ -113,8 +140,29 @@ const Chat = (props) => {
         </div>
       </div>
 
+      <div className="absolute left-1/2 transform -translate-x-1/2 w-1/2 min-w-[600px] h-14 rounded-full bg-slate-300 bottom-5 flex justify-between items-center">
 
-
+          <input
+            className="w-3/4 h-full rounded-full pl-6 pr-12"
+            type="text"
+            ref={inputRef}
+            placeholder="Type your message here"
+          />
+        <div className="flex items-center justify-center w-1/4 h-full">
+          <span className="mr-4 text-xl hover:scale-125 cursor-pointer transition-all">
+            <IoIosAttach />
+          </span>
+          <span className="mr-4 text-xl hover:scale-125 cursor-pointer transition-all">
+            <BsEmojiSmile />
+          </span>
+          <button
+            onClick={handleMessage}
+            className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center transition-all hover:scale-125"
+          >
+            <IoIosSend />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

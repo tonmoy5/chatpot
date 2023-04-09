@@ -113,23 +113,7 @@ const Chat = (props) => {
         </div>
       </div>
 
-{/* message input */}
-<div className="absolute bottom-0 w-full bg-[#f0efef] px-3 py-2 flex items-center">
-  <input
-    type="text"
-    placeholder="Type a message"
-    className="flex-1 mr-2 bg-transparent outline-none"
-    value={newMessage}
-    onChange={(e) => setNewMessage(e.target.value)}
-    onKeyPress={handleKeyPress}
-  />
-  <button
-    className="text-blue-500 hover:text-blue-600"
-    onClick={handleSend}
-  >
-    Send
-  </button>
-</div>
+
 
     </div>
   );

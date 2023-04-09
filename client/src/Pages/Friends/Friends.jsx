@@ -5,15 +5,12 @@ import Chat from "../Chat/Chat";
 import userData from "../../Assets/UserData/UserData";
 
 const Friends = () => {
+  // set Friend ID
   const [selected, setSelected] = useState(1);
+  // set chat ID
   const [chat, setChat] = useState(1);
+  // set chat lists to show and hide 
   const [showChat, setShowChat] = useState(true);
-
-
-  const handleCall = (id) => {
-    // console.log(id);
-  };
-  // console.log(chat);
 
   return (
     <div className=" flex">
@@ -33,11 +30,10 @@ const Friends = () => {
 
         {/* friends list */}
         <div className="flex flex-col  mt-5">
-          {userData.friends.map((friend) => {
+          {userData.friends.map((friend,index) => {
             const status = friend.status ? "Online" : "Offline";
-            //   console.log(status);
             return (
-              <div
+              <div key={index}
                 onClick={() => {
                   const singleChat = userData.chatList.find(chat => chat.friend.id === friend.id);
                   setSelected(friend.id);

@@ -10,6 +10,7 @@ import Main from "./Layouts/Main";
 
 import Settings from "./Pages/Settings/Settings";
 
+
 const router = createBrowserRouter([
   {
     path: "/",

@@ -3,13 +3,12 @@ import { SlMagnifier } from "react-icons/sl";
 import Chat from "../Chat/Chat";
 import userData from "../../Assets/UserData/UserData";
 
-
-// console.log(userData);
-
 const Chats = () => {
+  // set ChatID
   const [selected, setSelected] = useState(1);
+  // set chat lists to show and hide 
   const [showChat, setShowChat] = useState(true);
-  // console.log(selected);
+
   return (
     <div className="flex w-full relative">
       <div className={`${showChat ? 'right-[100vw] md:block ' : 'right-0 block'} md:static absolute duration-300 top-0 w-full h-screen pt-5 md:w-[358px] md:shadow z-[5] bg-white`}>
@@ -27,9 +26,9 @@ const Chats = () => {
 
         {/* friends list */}
         <div className="flex flex-col  mt-5">
-          {userData.chatList.map((chat) => {
+          {userData.chatList.map((chat,index) => {
             return (
-              <div
+              <div key={index}
                 onClick={() => {
                   setSelected(chat.id);
                   setShowChat((prevShowDiv1) => !prevShowDiv1)

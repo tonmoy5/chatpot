@@ -1,0 +1,2 @@
+# ChatPot
+## A chatting application

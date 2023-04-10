@@ -10,6 +10,8 @@ import {
 import { SlMagnifier } from "react-icons/sl";
 import { BsEmojiSmile } from "react-icons/bs";
 import userData from "../../Assets/UserData/UserData";
+import chatBG from '../../Assets/img/chatBG.jpg'
+import Popup from "../../Components/Sidebar/Call/Popup";
 
 const Chat = (props) => {
   const chatID = props.chatID;
@@ -58,7 +60,7 @@ const Chat = (props) => {
   return (
     <div className="">
       {/* chat heder */}
-      <div className="flex right-0 top-0 absolute w-full border-b items-center justify-between md:pl-5 pr-3 py-2 shadow-sm backdrop-blur-md transition-colors duration-500 ">
+      <div className="flex bg-chat-header right-0 top-0 absolute w-full border-b items-center justify-between md:pl-5 pr-3 py-2 shadow-sm backdrop-blur-md transition-colors duration-500 ">
         {/* friends profile */}
         <div className="grid grid-cols-5  ">
           {/* back arrow */}
@@ -86,11 +88,15 @@ const Chat = (props) => {
             <p
               className={
                 chat.friend?.status
-                  ? "text-[#1D800D] font-bold text-xs"
+                  ? "text-[#1D800D] font-bold text-xs flex items-center gap-2"
                   : "text-[#A90000] font-bold text-xs"
               }
             >
               {status}
+              <span className={status=='Online'? 'relative mt-1 flex h-2 w-2':'hidden'}>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
+              </span>
             </p>
           </div>
         </div>
@@ -115,15 +121,17 @@ const Chat = (props) => {
       </div>
 
       {/* chats */}
-      <div 
-        className="bg-slate-900 h-[calc(100vh-60px)] md:h-[100vh] flex flex-col justify-between"
-        onClick={()=>isEmojiOpen && setIsEmojiOpen(false)}
+      
+      <div
+        className=" h-[calc(100vh-60px)] md:h-[100vh] flex flex-col justify-between bg-center "
+        onClick={() => isEmojiOpen && setIsEmojiOpen(false)}
+        
       >
         {/* Top Section Start */}
         <div className="">
           <div
             ref={divRef}
-            className="w-full py-20 px-2 h-[calc(100vh-110px)] md:h-[calc(100vh-80px)]  overflow-y-scroll "
+            className=" w-full py-20 px-2 h-[calc(100vh-110px)] md:h-[calc(100vh-80px)] customScroll  overflow-y-scroll "
           >
             {sortedMessages?.map((message, index) => (
               <div
@@ -137,8 +145,8 @@ const Chat = (props) => {
                 <p
                   className={
                     message.sender === "me"
-                      ? "bg-[#e8dcdc] rounded-full px-2 py-1 m-2 max-w-[500px] shadow"
-                      : "bg-[#FFFFFF] rounded-full px-2 py-1 m-2  shadow"
+                      ? "bg-chat-receiver-text-bg rounded-full px-2 py-1 m-2 max-w-[500px] shadow-md"
+                      : "bg-[#FFFFFF] rounded-full px-2 py-1 m-2  shadow-md"
                   }
                 >
                   {message.text}
@@ -164,7 +172,7 @@ const Chat = (props) => {
               </span>
               <span
                 className="md:mr-4 mr-2 text-lg hover:scale-125 cursor-pointer transition-all"
-                onClick={()=>setIsEmojiOpen(!isEmojiOpen)}
+                onClick={() => setIsEmojiOpen(!isEmojiOpen)}
               >
                 <BsEmojiSmile className="relative" />
               </span>
@@ -193,6 +201,7 @@ const Chat = (props) => {
         </div>
 
 
+        <img className="absolute -z-10 opacity-20 w-full h-screen" src={chatBG} alt="" />
       </div>
     </div>
   );

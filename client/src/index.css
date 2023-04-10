@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+  .customScroll::-webkit-scrollbar{
+    opacity:0;
+    background: transparent;
+    width: 10px;
+    
+}
+.customScroll::-webkit-scrollbar:hover{
+    opacity: 1;
+}
+.customScroll:hover::-webkit-scrollbar-thumb{
+    background: rgb(164, 142, 142);
+    border-radius: 10px;
+}

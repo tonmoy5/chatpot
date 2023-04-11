@@ -21,6 +21,7 @@ const Chat = (props) => {
   const [messages, setMessages] = useState([]);
   const chat = userData.chatList.find((chat) => chat.id === chatID);
   const status = chat?.friend?.status ? "Online" : "Offline";
+  const [inputText, setInputText]=useState('')
 
   const sortedMessages = [
     ...chat?.messages?.sender?.me,
@@ -37,19 +38,19 @@ const Chat = (props) => {
     });
 
   const handleMessage = (event) => {
-    const input = inputRef.current;
-    const newMessage = inputRef.current.value;
     const newMessageObj = {
       timestamp: new Date(),
-      text: newMessage,
+      text: inputText,
     };
+
 
     // Add the new message to the messages array
     chat?.messages?.sender?.me?.push(newMessageObj);
     setMessages([newMessageObj]);
+    console.log(newMessageObj)
 
     // Clear the input field
-    input.value = "";
+    setInputText('')
   };
 
   useEffect(() => {
@@ -164,6 +165,8 @@ const Chat = (props) => {
               className="w-3/4 h-full rounded-full pl-6 pr-12"
               type="text"
               ref={inputRef}
+              onChange={(event)=>setInputText(event.target.value)}
+              value={inputText}
               placeholder="Type your message here"
             />
             <div className="flex items-center justify-center w-1/4 h-full">
@@ -176,6 +179,7 @@ const Chat = (props) => {
               >
                 <BsEmojiSmile className="relative" />
               </span>
+              {/* send button */}
               <button
                 onClick={handleMessage}
                 className="md:w-8 md:h-8 w-5 h-5 rounded-full md:bg-slate-200 flex items-center justify-center transition-all hover:scale-125"
@@ -184,13 +188,12 @@ const Chat = (props) => {
               </button>
 
               {/* emoji picker  starts */}
-
               <div className="absolute bottom-16 -right-3">
                 {isEmojiOpen && (
                   <EmojiPicker
                     onEmojiClick={(event, emojiObject) => {
                       // handle emoji click here
-                      console.log(emojiObject);
+                      setInputText(inputText+event.emoji)
                     }}
                   />
                 )}

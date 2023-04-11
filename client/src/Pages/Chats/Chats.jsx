@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SlMagnifier } from "react-icons/sl";
 import Chat from "../Chat/Chat";
 import userData from "../../Assets/UserData/UserData";
+import AudioCall from "../../Components/Sidebar/Call/AudioCall";
 
 const Chats = () => {
   // set ChatID
@@ -85,6 +86,7 @@ const Chats = () => {
       {/* chat */}
       <div className={`${showChat ? 'block' : 'md:block block'} w-full relative`}>
         {<Chat chatID={selected} setShowChat={setShowChat} />}
+
       </div>
     </div>
   );

@@ -1,36 +1,64 @@
-import React from 'react';
-import userData from '../../../Assets/UserData/UserData';
-import {FiPhoneCall} from "react-icons/fi"
-import {HiOutlineVideoCamera} from "react-icons/hi"
+import React, { useState } from "react";
+import userData from "../../../Assets/UserData/UserData";
+import { FiPhoneCall } from "react-icons/fi";
+import { HiOutlineVideoCamera } from "react-icons/hi";
 
-const Popup = () => {
-    const isAudioCall = true
-    return (
-        <div className='flex gap-3 p-3 items-center w-[calc(100vw-10px)] md:w-[300px] backdrop-blur-sm h-24 rounded-b-xl absolute z-10 top-0 left-[5px] md:left-[50%] right-[50%] m-auto shadow-xl justify-between'>
-            <div className="flex gap-2">
-                <img className='rounded-full w-12 h-12' src={userData.friends[0].avatar} alt="" />
-                <div>
-                <p className='font-semibold'>{userData.friends[0].name}</p>
-                <p className='font-thin'>Incoming call...</p>
-                </div>
-            </div>
-            <div className='flex gap-2'>
-                <button 
-                className='p-2 rounded-full border hover:shadow-xl border-[#696363] text-red-500 text-xl hover:bg-red-400 hover:text-white hover:scale-120 transition-all'
-                >
-                    <FiPhoneCall 
-                        className='' 
-                    />
-                </button>
-                <button 
-                className='p-2 rounded-full border hover:shadow-xl border-[#696363] text-green-500 text-xl hover:bg-green-400 hover:text-white hover:scale-120 transition-all'
-                >
-                   {isAudioCall?  <FiPhoneCall/>: <HiOutlineVideoCamera/>}
-                </button>
-                
-            </div>
+const Popup = (props) => { 
+  // set popup size
+  const [popupSize, setPopupSize] = useState(
+    "w-[calc(100vw-30px)] md:w-[300px] h-24 md:min-w-[400px] flex duration-300"
+  );
+  return (
+    // call popup
+    <div
+      onClick={() =>
+        setPopupSize(
+          popupSize ===
+            "w-[calc(100vw-30px)] md:w-[300px] h-24 md:min-w-[400px] flex duration-300"
+            ? "w-[calc(100vw-30px)] md:w-[calc(40%-100px)] md:min-w-[400px] h-[calc(100vh-200px)] flex flex-col duration-300 py-20"
+            : "w-[calc(100vw-30px)] md:w-[300px] h-24 md:min-w-[400px] flex duration-300"
+        )
+      }
+      className={`${popupSize} cursor-pointer gap-3 p-3 items-center backdrop-blur-sm rounded-b-xl absolute z-10  top-0 left-1/2 transform -translate-x-1/2  shadow-xl justify-between `}
+    >
+      {/* caller info */}
+      <div className={popupSize==='w-[calc(100vw-30px)] md:w-[300px] h-24 md:min-w-[400px] flex duration-300'? " flex gap-2":"block mb-3"}>
+        <img
+          className={popupSize ==='w-[calc(100vw-30px)] md:w-[300px] h-24 md:min-w-[400px] flex duration-300'? " rounded-full w-12 h-12":"rounded-full w-28 h-28 mb-3"}
+          src={userData.friends[0].avatar}
+          alt=""
+        />
+        <div>
+          <p className={popupSize==='w-[calc(100vw-30px)] md:w-[300px] h-24 md:min-w-[400px] flex duration-300'? " font-semibold":"font-semibold text-center text-xl"}>{userData.friends[0].name}</p>
+          <p className={popupSize==='w-[calc(100vw-30px)] md:w-[300px] h-24 md:min-w-[400px] flex duration-300'? " font-thin":"font-thin text-center text-xl"}>Incoming call...</p>
         </div>
-    );
+      </div>
+      {/* call options */}
+      <div onClick={(event)=>{event.stopPropagation()}} className="flex justify-center items-center gap-3">
+
+        {/* cancel button */}
+        <button onClick={()=>props.setIsIncomingCall(false)} className={popupSize==='w-[calc(100vw-30px)] md:w-[300px] h-24 md:min-w-[400px] flex duration-300'?"p-2 rounded-full hover:shadow-xl text-xl bg-red-400 text-white hover:scale-110 transition-all":"p-2 rounded-full hover:shadow-xl text-3xl bg-red-400 text-white hover:scale-110 transition-all"}>
+          <FiPhoneCall className="" />
+        </button>
+
+        {/* receive button */}
+        <span class="relative flex justify-center items-center h-10 w-10">
+          <span class="animate-ping hover:animate-none absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-8 w-8 justify-center items-center">
+            <button className={popupSize==='w-[calc(100vw-30px)] md:w-[300px] h-24 md:min-w-[400px] flex duration-300'?"p-2 absolute rounded-full  hover:shadow-xl   text-xl bg-green-400 text-white hover:scale-110 transition-all":"p-2 absolute rounded-full  hover:shadow-xl   text-3xl bg-green-400 text-white hover:scale-110 transition-all"}>
+
+              {props.isAudioCall ? (
+                <FiPhoneCall onClick={()=>{props.setCallerInfo(userData.friends[0])
+                  props.setIsIncomingCall(false)} } />
+              ) : (
+                <HiOutlineVideoCamera  onClick={()=>console.log('received video call')}/>
+              )}
+            </button>
+          </span>
+        </span>
+      </div>
+    </div>
+  );
 };
 
 export default Popup;

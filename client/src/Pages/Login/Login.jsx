@@ -3,88 +3,112 @@ import { BsFacebook } from 'react-icons/bs'
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-    const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value)
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value)
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const userData = {
+      email: email,
+      password: password,
     }
+    console.log(JSON.stringify(userData))
+  }
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value)
+  const handleGoogleSubmit = () => {
+    const handleGoogleLogin = () => {
+      const userData = {
+        email: 'googleuser@gmail.com',
+      };
+      console.log(JSON.stringify(userData))
     }
+    handleGoogleLogin()
+  }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(`Username: ${username}`)
-        console.log(`Password: ${password}`)
+  const handleFacebookSubmit = () => {
+    const handleFacebookLogin = () => {
+      const userData = {
+        email: 'facebookuser@gmail.com',
+      };
+      console.log(JSON.stringify(userData))
     }
+    handleFacebookLogin()
+  }
 
-    const handleGoogleSubmit = () => {
-        const handleGoogleLogin = () => {
-            console.log("Google login successful!");
-        }
-        handleGoogleLogin();
-    }
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="bg-white mx-auto shadow-lg md:w-[500px] rounded-lg">
+        <div className="py-8 px-8">
 
-    const handleFacebookSubmit = () => {
-        const handleFacebookLogin = () => {
-            console.log("Facebook login successful!");
-        }
-        handleFacebookLogin();
-    }
+          <h1 className="md:text-4xl text-3xl font-bold text-center">
+            Login
+          </h1>
 
-    return (
-        <div className="min-h-screen flex items-center justify-center">
-            <div className="bg-white mx-auto shadow-lg">
-                <div className="py-10 px-5">
+          <form onSubmit={handleSubmit} className="flex flex-col mt-8">
 
-                    <h1 className="lg:text-5xl md:text-4xl text-3xl font-bold text-[#00ACED] text-center">
-                        LOGIN
-                    </h1>
+            <input type="email" id="email" name="email" value={email} onChange={handleEmailChange} placeholder="E-mail Address"
+              className="mb-4 text-slate-600 md:text-lg text-sm outline-none border-2 p-2 rounded-lg" />
 
-                    <form onSubmit={handleSubmit} className="flex flex-col pt-8">
+              <input type="password" id="password" name="password" value={password} onChange={handlePasswordChange} placeholder="Password"
+                className="mb-4 text-slate-600 md:text-lg text-sm outline-none border-2 p-2 rounded-lg" />
 
-                        <input type="text" id="username" name="username" value={username} onChange={handleUsernameChange} placeholder="E-mail Address"
-                            className="mt-4 text-slate-600 md:text-lg text-sm outline-none border-b-2" />
+            <a href="#" className="mb-4 pl-2 text-[#0171D3] hover:underline text-center md:text-lg text-sm">
+              Forgot Password?
+            </a>
 
-                        <input type="password" id="password" name="password" value={password} onChange={handlePasswordChange} placeholder="Password"
-                            className="mt-4 text-slate-600 md:text-lg text-sm outline-none border-b-2" />
+            <button
+              type="submit"
+              className="mb-4 w-full md:text-lg text-sm font-semibold text-white bg-[#0171D3] hover:scale-105 transition-all rounded-lg p-2">
+              Sign Up
+            </button>
 
-                        <button type="submit"
-                            className="mt-4 w-full lg:text-xl md:text-xl text-lg font-bold text-white bg-slate-400 hover:scale-105 transition-all rounded-lg p-3 mx-auto">
-                            Submit
-                        </button>
+            <p className="md:text-lg text-sm text-center">
+              Don't have an account?
+              <a href="/register" className="pl-2 text-[#0171D3] hover:underline">
+                Sign Up
+              </a>
+            </p>
 
-                        <button
-                            type="button"
-                            onClick={handleGoogleSubmit}
-                            className="mt-4 w-full bg-slate-400 hover:scale-105 transition-all rounded-lg p-3 mx-auto">
-                            <span className="flex items-center justify-center lg:text-xl md:text-xl text-lg font-bold text-white">
-                                <FcGoogle className="inline-block mr-4"/> Login With Google
-                            </span>
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={handleFacebookSubmit}
-                            className="mt-4 w-full bg-slate-400 hover:scale-105 transition-all rounded-lg p-3 mx-auto">
-                            <span className="flex items-center justify-center lg:text-xl md:text-xl text-lg font-bold text-white">
-                                <BsFacebook className="inline-block text-[#00ACED] mr-4"/> Login With Facebook
-                            </span>
-                        </button>
-
-                        <p className="mt-4 md:text-lg text-sm text-center text-bold">
-                            Don't have an account?
-                            <a href="#" className="pl-2 lg:text-lg md:text-lg text-sm text-[#00ACED] hover:underline">
-                                Register Here
-                            </a>
-                        </p>
-                    </form>
-                </div>
+            <div className="flex items-center gap-2 my-4">
+              <div class="border-b-2 border-slate-400 w-2/4"></div>
+              <div className="md:text-lg text-sm text-slate-400">OR</div>
+              <div class="border-b-2 border-slate-400 w-2/4"></div>
             </div>
+
+            <button
+              type="button" onClick={handleGoogleSubmit}
+              className="mb-4 w-full text-slate-400 hover:text-white hover:bg-[#31974D] hover:scale-105 transition-all rounded-lg p-2 border-2">
+              <p className="flex items-center justify-center gap-3">
+                <FcGoogle className="md:text-xl text-lg" />
+                <span className="md:text-lg text-sm font-semibold">
+                  Sign Up With Google
+                </span>
+              </p>
+            </button>
+
+            <button
+              type="button" onClick={handleFacebookSubmit}
+              className="mb-4 w-full text-slate-400 hover:text-white hover:bg-[#4268B3] hover:scale-105 transition-all rounded-lg p-2 border-2">
+              <p className="flex items-center justify-center gap-3">
+                <BsFacebook className="md:text-xl text-lg" />
+                <span className="md:text-lg text-sm font-semibold">
+                  Sign Up With Facebook
+                </span>
+              </p>
+            </button>
+          </form>
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default Login

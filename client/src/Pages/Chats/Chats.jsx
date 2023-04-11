@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { SlMagnifier } from "react-icons/sl";
-import Chat from "../Chat/Chat";
 import userData from "../../Assets/UserData/UserData";
-import AudioCall from "../../Components/Sidebar/Call/AudioCall";
+import Chat from "../Chat/Chat";
+
 
 const Chats = () => {
   // set ChatID
@@ -27,7 +27,7 @@ const Chats = () => {
 
         {/* friends list */}
         <div className="flex flex-col  mt-5">
-          {userData.chatList.map((chat,index) => {
+          {userData.chatList.map((chat, index) => {
             return (
               <div key={index}
                 onClick={() => {

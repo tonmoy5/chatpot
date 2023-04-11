@@ -1,32 +1,32 @@
 const userData = {
   userId: 1,
   userName: "John Doe",
-  userAvatar: "https://via.placeholder.com/150",
+  userAvatar: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg",
   friends: [
     {
       id: 1,
       name: "Alice",
-      avatar: "https://via.placeholder.com/150",
+      avatar: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg",
       status: true,
       userName: "@john.doe",
     },
     {
       id: 2,
       name: "Bob",
-      avatar: "https://via.placeholder.com/150",
+      avatar: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg",
       status: false,
       userName: "@john.doe",
     },
     {
       id: 3,
       name: "Charlie",
-      avatar: "https://via.placeholder.com/150",
+      avatar: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg",
       status: true,
       userName: "@john.doe",
     },
   ],
 
-  
+
 
   chatList: [
     {
@@ -34,7 +34,7 @@ const userData = {
       friend: {
         id: 1,
         name: "Alice",
-        avatar: "https://via.placeholder.com/150",
+        avatar: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg",
         status: true,
         userName: "@Alice",
       },
@@ -136,13 +136,13 @@ const userData = {
       unseenMessages: 0,
       time: "11:47 AM",
     },
-    
+
     {
       id: 2,
       friend: {
         id: 2,
         name: "Bob",
-        avatar: "https://via.placeholder.com/150",
+        avatar: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg",
         status: false,
         userName: "@Bob",
       },
@@ -161,7 +161,7 @@ const userData = {
       friend: {
         id: 3,
         name: "Charlie",
-        avatar: "https://via.placeholder.com/150",
+        avatar: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg",
         status: true,
         userName: "@Charlie",
       },
@@ -196,7 +196,7 @@ const userData = {
       friend: {
         id: 1,
         name: "Alice",
-        avatar: "https://via.placeholder.com/150",
+        avatar: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg",
         status: true,
         userName: "@alice",
       },
@@ -209,7 +209,7 @@ const userData = {
       friend: {
         id: 2,
         name: "Bob",
-        avatar: "https://via.placeholder.com/150",
+        avatar: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg",
         status: false,
         userName: "@bob",
       },
@@ -223,7 +223,7 @@ const userData = {
       friend: {
         id: 3,
         name: "Charlie",
-        avatar: "https://via.placeholder.com/150",
+        avatar: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg",
         status: true,
         userName: "@charlie",
       },

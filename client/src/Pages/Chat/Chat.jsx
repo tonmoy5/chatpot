@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
 import EmojiPicker from "emoji-picker-react"; // import your emoji picker library
+import React, { useEffect, useRef, useState } from "react";
+import { BsEmojiSmile } from "react-icons/bs";
 import { CiMenuKebab } from "react-icons/ci";
 import {
   IoIosArrowBack,
@@ -8,10 +9,8 @@ import {
   IoIosSend,
 } from "react-icons/io";
 import { SlMagnifier } from "react-icons/sl";
-import { BsEmojiSmile } from "react-icons/bs";
 import userData from "../../Assets/UserData/UserData";
-import chatBG from '../../Assets/img/chatBG.jpg'
-import Popup from "../../Components/Sidebar/Call/Popup";
+import chatBG from '../../Assets/img/chatBG.jpg';
 
 const Chat = (props) => {
   const chatID = props.chatID;
@@ -21,7 +20,7 @@ const Chat = (props) => {
   const [messages, setMessages] = useState([]);
   const chat = userData.chatList.find((chat) => chat.id === chatID);
   const status = chat?.friend?.status ? "Online" : "Offline";
-  const [inputText, setInputText]=useState('')
+  const [inputText, setInputText] = useState('')
 
   const sortedMessages = [
     ...chat?.messages?.sender?.me,
@@ -94,7 +93,7 @@ const Chat = (props) => {
               }
             >
               {status}
-              <span className={status=='Online'? 'relative mt-1 flex h-2 w-2':'hidden'}>
+              <span className={status == 'Online' ? 'relative mt-1 flex h-2 w-2' : 'hidden'}>
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
               </span>
@@ -122,11 +121,11 @@ const Chat = (props) => {
       </div>
 
       {/* chats */}
-      
+
       <div
         className=" h-[calc(100vh-60px)] md:h-[100vh] flex flex-col justify-between bg-center "
         onClick={() => isEmojiOpen && setIsEmojiOpen(false)}
-        
+
       >
         {/* Top Section Start */}
         <div className="">
@@ -165,7 +164,7 @@ const Chat = (props) => {
               className="w-3/4 h-full rounded-full pl-6 pr-12"
               type="text"
               ref={inputRef}
-              onChange={(event)=>setInputText(event.target.value)}
+              onChange={(event) => setInputText(event.target.value)}
               value={inputText}
               placeholder="Type your message here"
             />
@@ -193,7 +192,7 @@ const Chat = (props) => {
                   <EmojiPicker
                     onEmojiClick={(event, emojiObject) => {
                       // handle emoji click here
-                      setInputText(inputText+event.emoji)
+                      setInputText(inputText + event.emoji)
                     }}
                   />
                 )}

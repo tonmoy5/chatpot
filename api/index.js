@@ -15,13 +15,18 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-// const mongodbUri = process.env.MONGODB_URI || 'mongodb://localhost/chatpot';
+const mongodbUri =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/chatpot";
 
 // Set up MongoDB connection
-// mongoose.connect('mongodb://localhost/chatpot', { useNewUrlParser: true });
-// mongoose.connection.on('connected', () => {
-//   console.log('Connected to MongoDB!');
-// });
+mongoose
+  .connect(mongodbUri, { useNewUrlParser: true })
+  .then(() => {
+    console.log("DB connected successfully!");
+  })
+  .catch((err) => {
+    console.log("DB Connection error: ", err);
+  });
 
 // Set up routes
 // app.use('/users', userRoutes);

@@ -8,6 +8,8 @@ const cors = require("cors");
 const { Server } = require("socket.io");
 require("dotenv").config();
 
+const authRouter = require("./routes/authRoutes")
+
 // internal imports
 
 // express app
@@ -29,6 +31,7 @@ mongoose
   });
 
 // Set up routes
+app.use('/auth', authRouter)
 // app.use('/users', userRoutes);
 // app.use('/chat_rooms', chatRoomRoutes);
 // app.use('/messages', messageRoutes);
